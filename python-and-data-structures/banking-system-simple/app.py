@@ -17,11 +17,11 @@ WITHDRAW_AMOUNT_LIMIT = 500.00
 statement = ""
 
 menu = f"""
-###   BANK   ###
+*   BANK   *
 
 d - Deposit
 w - Withdraw
-s - Statement
+s - Statements
 e - Exit 
 
 """
@@ -34,8 +34,13 @@ while True:
     ## Deposit
     if option == "d":
         deposit = float(input("Please enter the amount to deposit:\n"))
-        balance += deposit
-        statement += f"Deposited R$ {deposit} to your account.\n"
+
+        if deposit <= 0:
+            print("Deposit amount must be greater than zero.\n")
+        else:
+            balance += deposit
+            statement += f"Deposited R$ {deposit} to your account.\n"
+
     ## Withdraw
     elif option == "w":
 
@@ -50,9 +55,11 @@ while True:
         if withdrawCount > WITHDRAW_AMOUNT_LIMIT:
             print(f"You can only withdraw up to R$ {WITHDRAW_AMOUNT_LIMIT} times.\n")
 
-    ## Statement
+    ## Statements
     elif option == "s":
+        print(" STATEMENTS ".center(50, "#"))
         print(statement)
+        print("***".center(50, "-"))
 
     ## Exit
     elif option == "e":
